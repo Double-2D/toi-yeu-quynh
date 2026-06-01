@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gửi bạn Quỳnh ❤️</title>
     <style>
-        /* Hiệu ứng nền chuyển màu liên tục */
+        /* Nền chuyển màu động */
         body {
             margin: 0;
             padding: 0;
@@ -17,7 +17,7 @@
             align-items: center;
             height: 100vh;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden; /* Ẩn thanh cuộn */
+            overflow: hidden;
             position: relative;
         }
 
@@ -27,57 +27,104 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Khối chứa nội dung chính */
+        /* Khối nội dung chính */
         .card {
             text-align: center;
-            background: rgba(255, 255, 255, 0.65);
-            padding: 50px 70px;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 40px 50px;
             border-radius: 25px;
             box-shadow: 0 10px 40px rgba(255, 100, 150, 0.3);
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 255, 255, 0.9);
-            /* Hiệu ứng nảy lên khi load trang */
-            animation: popIn 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            z-index: 10; /* Giữ khối này nổi lên trên các icon bay */
+            animation: popIn 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 10;
+            width: 85%;
+            max-width: 450px;
         }
 
-        /* Ảnh GIF */
         .cute-gif {
             width: 180px;
             border-radius: 15px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
 
-        /* Chữ Love Quỳnh 3000 ở trung tâm */
+        /* Câu hỏi chính */
+        h2 {
+            color: #d10047;
+            font-size: 2rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* Dòng chữ xuất hiện khi bấm Có */
         h1 {
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             color: #d10047;
             margin: 0;
             font-weight: 800;
-            letter-spacing: 1px;
-            /* Chuyển hiệu ứng đập và phát sáng vào chính dòng chữ */
             animation: beatText 1.5s infinite alternate ease-in-out;
-            user-select: none;
         }
 
-        /* Các Keyframe hiệu ứng */
+        .success-text {
+            font-size: 1.5rem;
+            color: #ff4d6d;
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        /* Khu vực chứa nút bấm */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            height: 50px;
+            position: relative;
+        }
+
+        /* Định dạng chung cho nút */
+        .btn {
+            padding: 12px 35px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Nút Có */
+        .btn-yes {
+            background-color: #ff4d6d;
+            color: white;
+        }
+
+        .btn-yes:hover {
+            transform: scale(1.1);
+            background-color: #ff1a49;
+            box-shadow: 0 6px 20px rgba(255, 77, 109, 0.4);
+        }
+
+        /* Nút Không */
+        .btn-no {
+            background-color: #adb5bd;
+            color: white;
+            z-index: 999; /* Đảm bảo luôn nổi lên để bấm/rê chuột */
+        }
+
+        /* Keyframes hiệu ứng */
         @keyframes beatText {
-            0% { 
-                transform: scale(1); 
-                text-shadow: 0 0 15px rgba(255, 77, 109, 0.4), 2px 2px 4px rgba(255, 255, 255, 0.9); 
-            }
-            100% { 
-                transform: scale(1.08); 
-                text-shadow: 0 0 25px rgba(255, 77, 109, 0.8), 2px 2px 4px rgba(255, 255, 255, 0.9); 
-            }
+            0% { transform: scale(1); text-shadow: 0 0 15px rgba(255, 77, 109, 0.4); }
+            100% { transform: scale(1.08); text-shadow: 0 0 25px rgba(255, 77, 109, 0.8); }
         }
 
         @keyframes popIn {
-            0% { opacity: 0; transform: scale(0.5) translateY(50px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
+            0% { opacity: 0; transform: scale(0.5); }
+            100% { opacity: 1; transform: scale(1); }
         }
 
-        /* CSS cho các icon bay từ dưới lên */
+        /* Icon bay ngẫu nhiên */
         .floating-icon {
             position: absolute;
             bottom: -10vh;
@@ -95,42 +142,63 @@
 </head>
 <body>
 
-    <!-- Khối thẻ trung tâm -->
     <div class="card">
-        <img src="https://media.tenor.com/tHqgIqGk3m8AAAAi/milk-and-mocha-bear-couple.gif" alt="Cute Bear" class="cute-gif">
-        
-        <!-- Chữ đã được đưa vào trung tâm làm điểm nhấn chính -->
-        <h1>Love Quỳnh 3000</h1>
+        <div id="question-space">
+            <img src="https://media.tenor.com/tHqgIqGk3m8AAAAi/milk-and-mocha-bear-couple.gif" alt="Cute Bear" class="cute-gif">
+            <h2>Quỳnh có yêu bạn không?</h2>
+            <div class="btn-container">
+                <button class="btn btn-yes" onclick="answerYes()">Có</button>
+                <button class="btn btn-no" id="btn-no" onmouseover="teleportNo()" onclick="teleportNo()">Không</button>
+            </div>
+        </div>
+
+        <div id="success-space" style="display: none;">
+            <img src="https://media.tenor.com/Z8sk7W_96YMAAAAi/milk-and-mocha-hug.gif" alt="Happy Bear" class="cute-gif">
+            <h1>Love Quỳnh 3000</h1>
+            <div class="success-text">Bạn cũng yêu Quỳnh nhiều lắmmmmm</div>
+        </div>
     </div>
 
-    <!-- Khối JavaScript tạo hiệu ứng mưa biểu tượng -->
     <script>
+        // Hàm xử lý dịch chuyển nút "Không"
+        function teleportNo() {
+            const btnNo = document.getElementById('btn-no');
+            
+            // Chuyển sang định vị fixed để nó bay nhảy tự do khắp màn hình
+            btnNo.style.position = 'fixed';
+            
+            // Tính toán tọa độ ngẫu nhiên dựa trên kích thước màn hình
+            // Trừ đi 100-150px rìa để nút không bị nhảy ra ngoài rìa màn hình quá
+            const randomX = Math.random() * (window.innerWidth - 120);
+            const randomY = Math.random() * (window.innerHeight - 50);
+            
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+        }
+
+        // Hàm xử lý khi bấm nút "Có"
+        function answerYes() {
+            // Ẩn phần câu hỏi đi
+            document.getElementById('question-space').style.display = 'none';
+            // Hiện phần dòng chữ ngọt ngào lên
+            document.getElementById('success-space').style.display = 'block';
+            
+            // Nếu nút Không đang bay lung tung thì ẩn nó đi hoàn toàn cho đẹp
+            document.getElementById('btn-no').style.display = 'none';
+        }
+
+        // Hiệu ứng mưa trái tim/hoa đào rơi phía nền
         function createFloatingIcon() {
             const icon = document.createElement('div');
             icon.classList.add('floating-icon');
-            
-            // Danh sách các icon sẽ rơi ngẫu nhiên
             const shapes = ['❤️', '💖', '💕', '✨', '🌸', '🎀'];
             icon.innerText = shapes[Math.floor(Math.random() * shapes.length)];
-            
-            // Vị trí xuất hiện ngẫu nhiên theo chiều ngang (0 - 100% chiều rộng)
             icon.style.left = Math.random() * 100 + 'vw';
-            
-            // Kích thước ngẫu nhiên (15px - 35px)
             icon.style.fontSize = Math.random() * 20 + 15 + 'px';
-            
-            // Tốc độ bay ngẫu nhiên (4 - 7 giây)
             icon.style.animationDuration = Math.random() * 3 + 4 + 's';
-            
             document.body.appendChild(icon);
-
-            // Tự động xóa icon sau khi bay xong để web không bị lag
-            setTimeout(() => {
-                icon.remove();
-            }, 7000);
+            setTimeout(() => { icon.remove(); }, 7000);
         }
-
-        // Tạo ra một icon mới mỗi 300 mili-giây
         setInterval(createFloatingIcon, 300);
     </script>
 
