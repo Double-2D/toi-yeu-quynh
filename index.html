@@ -27,7 +27,7 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Khối nội dung chính - Đã ép Flexbox để mọi thứ ra giữa tâm */
+        /* Khối nội dung chính căn giữa tâm tuyệt đối */
         .card {
             background: rgba(255, 255, 255, 0.7);
             padding: 0 30px;
@@ -39,9 +39,7 @@
             z-index: 10;
             width: 85%;
             max-width: 550px;
-            height: 350px; /* Đặt chiều cao cố định cho ô trắng */
-            
-            /* Căn giữa tuyệt đối */
+            height: 350px; 
             display: flex;
             flex-direction: column;
             justify-content: center; 
@@ -63,7 +61,7 @@
         h2 {
             color: #d10047;
             font-size: 2.2rem;
-            margin: 0 0 40px 0; /* Chỉ để khoảng cách phía dưới câu hỏi */
+            margin: 0 0 40px 0;
             font-weight: 700;
         }
 
@@ -119,7 +117,7 @@
         .btn-no {
             background-color: #adb5bd;
             color: white;
-            z-index: 999; 
+            z-index: 9999; /* Tăng Z-index để chắc chắn nút luôn nổi lên trên cùng */
             position: relative;
         }
 
@@ -170,17 +168,30 @@
     <script>
         function teleportNo() {
             const btnNo = document.getElementById('btn-no');
+            
+            // Chuyển sang fixed để bứt nút ra khỏi khung và bay tự do
             btnNo.style.position = 'fixed';
             
+            // Lấy kích thước thực tế của nút
             const btnWidth = btnNo.offsetWidth;
             const btnHeight = btnNo.offsetHeight;
             
-            const maxX = window.innerWidth - btnWidth - 30;
-            const maxY = window.innerHeight - btnHeight - 30;
+            // Lấy kích thước thực tế của màn hình (trình duyệt)
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
             
-            const randomX = Math.max(30, Math.random() * maxX);
-            const randomY = Math.max(30, Math.random() * maxY);
+            // KHU VỰC AN TOÀN (Safe Zone): Cách các mép màn hình ít nhất 20px
+            const safePadding = 20;
             
+            // Tính toán khoảng tọa độ tối đa có thể bay tới (không bị lố)
+            const maxX = windowWidth - btnWidth - safePadding;
+            const maxY = windowHeight - btnHeight - safePadding;
+            
+            // Công thức bốc ngẫu nhiên tọa độ (Bắt buộc rơi vào khoảng từ safePadding đến maxX/maxY)
+            const randomX = Math.floor(Math.random() * (maxX - safePadding + 1)) + safePadding;
+            const randomY = Math.floor(Math.random() * (maxY - safePadding + 1)) + safePadding;
+            
+            // Áp dụng tọa độ mới
             btnNo.style.left = randomX + 'px';
             btnNo.style.top = randomY + 'px';
         }
