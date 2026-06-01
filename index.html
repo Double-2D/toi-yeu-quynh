@@ -3,71 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gửi người anh yêu ❤️</title>
+    <title>Gửi bạn Quỳnh ❤️</title>
     <style>
-        /* Cấu hình nền và căn giữa toàn bộ trang web */
+        /* Hiệu ứng nền chuyển màu liên tục */
         body {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+            background: linear-gradient(-45deg, #ff9a9e, #fecfef, #ffc3a0, #ffafbd);
+            background-size: 400% 400%;
+            animation: gradientBG 10s ease infinite;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Ẩn thanh cuộn */
+            position: relative;
         }
 
-        /* Khối chứa nội dung */
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Khối chứa nội dung chính */
         .card {
             text-align: center;
-            background: rgba(255, 255, 255, 0.4);
-            padding: 40px 60px;
-            border-radius: 20px;
-            box-shadow: 0 8px 32px 0 rgba(255, 77, 109, 0.15);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            animation: fadeIn 2s ease-in-out;
+            background: rgba(255, 255, 255, 0.65);
+            padding: 40px 50px;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(255, 100, 150, 0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            /* Hiệu ứng nảy lên khi load trang */
+            animation: popIn 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 10; /* Giữ khối này nổi lên trên các trái tim bay */
         }
 
-        /* Hiệu ứng trái tim đập */
+        /* Ảnh GIF */
+        .cute-gif {
+            width: 180px;
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Trái tim đập ở giữa */
         .heart {
-            font-size: 80px;
+            font-size: 60px;
             color: #ff4d6d;
             display: inline-block;
-            animation: beat 1.2s infinite alternate ease-in-out;
+            animation: beat 1s infinite alternate ease-in-out;
+            margin: 10px 0;
+            text-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
             user-select: none;
         }
 
-        /* Định dạng dòng chữ "anh yêu em" */
+        /* Chữ Yêu bạn Quỳnh */
         h1 {
-            font-size: 3.5rem;
-            color: #ff4d6d;
-            margin-top: 20px;
-            margin-bottom: 0;
-            font-weight: 600;
+            font-size: 3.2rem;
+            color: #d10047;
+            margin: 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
             letter-spacing: 1px;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
         }
 
-        /* Định nghĩa các hiệu ứng chuyển động (Animation) */
+        /* Các Keyframe hiệu ứng */
         @keyframes beat {
             0% { transform: scale(1); }
-            100% { transform: scale(1.18); }
+            100% { transform: scale(1.2); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.5) translateY(50px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        /* CSS cho các trái tim bay từ dưới lên */
+        .floating-icon {
+            position: absolute;
+            bottom: -10vh;
+            animation: floatUp linear infinite;
+            opacity: 0.8;
+            z-index: 1;
+            user-select: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Khối thẻ trung tâm -->
     <div class="card">
+        <!-- Bạn có thể thay link ảnh GIF khác nếu muốn -->
+        <img src="https://media.tenor.com/tHqgIqGk3m8AAAAi/milk-and-mocha-bear-couple.gif" alt="Cute Bear" class="cute-gif">
+        <br>
         <div class="heart">❤️</div>
-        <h1>anh yêu em</h1>
+        <h1>Yêu bạn Quỳnh ><</h1>
     </div>
+
+    <!-- Khối JavaScript tạo hiệu ứng mưa biểu tượng -->
+    <script>
+        function createFloatingIcon() {
+            const icon = document.createElement('div');
+            icon.classList.add('floating-icon');
+            
+            // Danh sách các icon sẽ rơi ngẫu nhiên
+            const shapes = ['❤️', '💖', '💕', '✨', '🌸', '🎀'];
+            icon.innerText = shapes[Math.floor(Math.random() * shapes.length)];
+            
+            // Vị trí xuất hiện ngẫu nhiên theo chiều ngang (0 - 100% chiều rộng)
+            icon.style.left = Math.random() * 100 + 'vw';
+            
+            // Kích thước ngẫu nhiên (15px - 35px)
+            icon.style.fontSize = Math.random() * 20 + 15 + 'px';
+            
+            // Tốc độ bay ngẫu nhiên (4 - 7 giây)
+            icon.style.animationDuration = Math.random() * 3 + 4 + 's';
+            
+            document.body.appendChild(icon);
+
+            // Tự động xóa icon sau khi bay xong để web không bị lag
+            setTimeout(() => {
+                icon.remove();
+            }, 7000);
+        }
+
+        // Tạo ra một icon mới mỗi 300 mili-giây
+        setInterval(createFloatingIcon, 300);
+    </script>
 
 </body>
 </html>
