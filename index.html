@@ -31,48 +31,45 @@
         .card {
             text-align: center;
             background: rgba(255, 255, 255, 0.65);
-            padding: 40px 50px;
+            padding: 50px 70px;
             border-radius: 25px;
             box-shadow: 0 10px 40px rgba(255, 100, 150, 0.3);
             backdrop-filter: blur(10px);
             border: 2px solid rgba(255, 255, 255, 0.9);
             /* Hiệu ứng nảy lên khi load trang */
             animation: popIn 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-            z-index: 10; /* Giữ khối này nổi lên trên các trái tim bay */
+            z-index: 10; /* Giữ khối này nổi lên trên các icon bay */
         }
 
         /* Ảnh GIF */
         .cute-gif {
             width: 180px;
             border-radius: 15px;
-            margin-bottom: 10px;
+            margin-bottom: 25px;
         }
 
-        /* Trái tim đập ở giữa */
-        .heart {
-            font-size: 60px;
-            color: #ff4d6d;
-            display: inline-block;
-            animation: beat 1s infinite alternate ease-in-out;
-            margin: 10px 0;
-            text-shadow: 0 0 20px rgba(255, 77, 109, 0.6);
+        /* Chữ Love Quỳnh 3000 ở trung tâm */
+        h1 {
+            font-size: 3.8rem;
+            color: #d10047;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: 1px;
+            /* Chuyển hiệu ứng đập và phát sáng vào chính dòng chữ */
+            animation: beatText 1.5s infinite alternate ease-in-out;
             user-select: none;
         }
 
-        /* Chữ Yêu bạn Quỳnh */
-        h1 {
-            font-size: 3.2rem;
-            color: #d10047;
-            margin: 0;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
-            letter-spacing: 1px;
-        }
-
         /* Các Keyframe hiệu ứng */
-        @keyframes beat {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.2); }
+        @keyframes beatText {
+            0% { 
+                transform: scale(1); 
+                text-shadow: 0 0 15px rgba(255, 77, 109, 0.4), 2px 2px 4px rgba(255, 255, 255, 0.9); 
+            }
+            100% { 
+                transform: scale(1.08); 
+                text-shadow: 0 0 25px rgba(255, 77, 109, 0.8), 2px 2px 4px rgba(255, 255, 255, 0.9); 
+            }
         }
 
         @keyframes popIn {
@@ -80,7 +77,7 @@
             100% { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        /* CSS cho các trái tim bay từ dưới lên */
+        /* CSS cho các icon bay từ dưới lên */
         .floating-icon {
             position: absolute;
             bottom: -10vh;
@@ -100,11 +97,10 @@
 
     <!-- Khối thẻ trung tâm -->
     <div class="card">
-        <!-- Bạn có thể thay link ảnh GIF khác nếu muốn -->
         <img src="https://media.tenor.com/tHqgIqGk3m8AAAAi/milk-and-mocha-bear-couple.gif" alt="Cute Bear" class="cute-gif">
-        <br>
-        <div class="heart">❤️</div>
-        <h1>Yêu bạn Quỳnh ><</h1>
+        
+        <!-- Chữ đã được đưa vào trung tâm làm điểm nhấn chính -->
+        <h1>Love Quỳnh 3000</h1>
     </div>
 
     <!-- Khối JavaScript tạo hiệu ứng mưa biểu tượng -->
